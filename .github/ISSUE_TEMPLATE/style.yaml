@@ -1,0 +1,22 @@
+name: 코드스타일 변경(Style)
+description: 코드 의미를 변경하지 않는 변경(세미콜론 추가, space 추가, 포맷팅)
+title: "[Style] "
+body:
+  - type: textarea
+    attributes:
+      label: 설명
+      description: 무엇을 바꿀 것이고, 왜 바꿔야하는지 설명해주세요.
+      placeholder: |
+        1. Class 명칭은 CamelCase 방식으로 작성되어야 합니다.
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 제약 사항
+      description: 이 이슈를 해결 할 때 제약 사항을 적어 주세요, 그 제약 사항을 지키면서 이슈를 해결해야 합니다.
+      placeholder: |
+        1. Test Coverage가 떨어지지 않아야 합니다.
+        2. ...
+    validations:
+      required: false

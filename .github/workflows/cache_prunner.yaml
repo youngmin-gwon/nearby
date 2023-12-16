@@ -1,0 +1,51 @@
+name: Cache Prunner Workflow
+
+permissions:
+  actions: write
+
+on: workflow_call
+
+jobs:
+  ## 현재 branch 에서 pubspec.lock 의 hash 값과 맞는 cache 만 남기고 나머지 삭제
+  clear-cache:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: 📚 코드 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🌴 브랜치 이름 가져오기
+        id: extract_branch
+        shell: bash
+        run: echo "current-branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
+      - name: 🗑️ 캐시 정리
+        env:
+          hash: ${{ hashFiles('**/pubspec.lock') }}
+          current-branch: ${{ steps.extract_branch.outputs.current-branch }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log("About to clear");
+            const caches = await github.rest.actions.getActionsCacheList({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/heads/${{ env.current-branch }}`
+            })
+
+            // 각 플랫폼 가상환경(macOS, Linux)에 저장될 cache 이름 목록
+            const targetCaches = [`macOS-flutter-${{ env.hash }}`, `Linux-flutter-${{ env.hash }}`]
+            for (const cache of caches.data.actions_caches) {
+              // 현재 버전에 맞는 cache 이름이 아닌 경우 삭제
+              if (!targetCaches.includes(cache.key)) {
+                console.log(`target cache to delete: ${cache.key}`)
+                github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+              }
+            }
+            console.log("Clear completed")

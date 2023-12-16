@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+printf "\e[33;1m%s\e[0m\n" 'Pre-Push'
+
+# Undo the stash of the files
+pop_stash_files() {
+	if [[ -n ${hasChanges} ]]; then
+		printf "\e[33;1m%s\e[0m\n" '=== 잠시 stash 로 넣은 변경파일을 다시 가져옵니다 ==='
+		git stash pop
+	fi
+}
+
+# Stash unstaged files
+hasChanges=$(git ls-files --others --exclude-standard -z | xargs -0 -n 1 git --no-pager diff /dev/null | less)
+if [[ -n ${hasChanges} ]]; then
+	printf "\e[33;1m%s\e[0m\n" 'stage 되지 않은 파일을 잠시 stash에 넣습니다.'
+	git stash push --keep-index --untracked
+fi
+
+printf "\e[33;1m%s\e[0m\n" '단위 테스트 실행'
+
+if ! flutter test; then
+	printf "\e[31;1m%s\e[0m\n" '단위 테스트 에러'
+	exit 1
+fi
+
+pop_stash_files
+printf "\e[33;1m%s\e[0m\n" '단위 테스트 완료'

@@ -1,0 +1,52 @@
+name: Flutter Analyzer Workflow
+
+permissions:
+  actions: read
+
+on: workflow_call
+
+jobs:
+  flutter_analyzer:
+    name: Flutter source code analyzer on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    env:
+      working-directory: ./
+    strategy:
+      matrix:
+        channel: [stable]
+        include:
+          - os: ubuntu-latest
+            flutter_path: /opt/hostedtoolcache/flutter
+          # - os: macos-latest
+          #   flutter_path: /Users/runner/hostedtoolcache/flutter
+      fail-fast: false
+
+    steps:
+      - name: 📚 코드 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐦 Flutter 환경설정 (cache 에 있으면 불러오기)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ matrix.channel }}
+          cache: true
+          cache-path: ${{ matrix.flutter_path }}
+          # cache key를 뒤에 pubspec.lock 의 hash 값을 붙어 다음과 같은 방식으로 생성함
+          # e.g.) macOS-flutter-d9b099ad9ddab4d6d09cb8ea3447e6b871cdacd650ff4f02e6fc177afa571fe1
+          cache-key: ${{ runner.os }}-flutter
+
+      - name: ➕ 의존성 설치
+        run: flutter pub get
+        working-directory: ${{ env.working-directory }}
+
+      - name: 🎨 코드 포맷팅 확인
+        run: dart format --output=none --set-exit-if-changed .
+        working-directory: ${{ env.working-directory }}
+
+      - name: 📈 정적 코드 분석
+        run: flutter analyze
+        working-directory: ${{ env.working-directory }}
+
+      - name: ✅ 자동화 테스트 분석
+        run: flutter test
+        working-directory: ${{ env.working-directory }}

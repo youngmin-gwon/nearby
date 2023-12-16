@@ -1,0 +1,53 @@
+name: Spell Check Workflow
+
+permissions:
+  actions: read
+
+on:
+  workflow_call:
+    inputs:
+      config:
+        required: false
+        type: string
+        default: .github/cspell.json
+      includes:
+        required: false
+        type: string
+        default: ""
+      runs_on:
+        required: false
+        type: string
+        default: ubuntu-latest
+      verbose:
+        required: false
+        type: boolean
+        default: false
+      modified_files_only:
+        required: false
+        type: boolean
+        default: true
+      working_directory:
+        required: false
+        type: string
+        default: .
+
+jobs:
+  english_spell_checker:
+    defaults:
+      run:
+        working-directory: ${{inputs.working_directory}}
+
+    runs-on: ${{inputs.runs_on}}
+
+    steps:
+      - name: 📚 코드 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🪄 영어 철자 분석
+        uses: streetsidesoftware/cspell-action@v5
+        with:
+          config: ${{inputs.config}}
+          files: ${{inputs.includes}}
+          incremental_files_only: ${{inputs.modified_files_only}}
+          root: ${{inputs.working_directory}}
+          verbose: ${{inputs.verbose}}

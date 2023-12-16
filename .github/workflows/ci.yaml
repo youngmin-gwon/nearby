@@ -1,0 +1,18 @@
+name: Continuous Integration Workflow
+
+permissions:
+  actions: write
+
+on:
+  pull_request:
+    types: [opened, reopened, edited]
+
+jobs:
+  cache_trimmer:
+    uses: ./.github/workflows/cache_prunner.yaml
+
+  flutter_analyzer:
+    uses: ./.github/workflows/flutter_analyzer.yaml
+
+  spell_checker:
+    uses: ./.github/workflows/spell_checker.yaml
