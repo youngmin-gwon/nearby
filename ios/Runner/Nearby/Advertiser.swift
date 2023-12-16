@@ -18,7 +18,7 @@ extension NearbyMethodCallHandler: AdvertiserDelegate {
             name: endpointName
         )
 
-        self.endpoints.append(endpoint)
+        endpoints.append(endpoint)
         connectionRequestHandler(true)
     }
 }

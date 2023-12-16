@@ -77,7 +77,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                 if newStrategy != self.strategy {
                     self.configureConnection(strategy: newStrategy)
                 }
-                
+
                 self.discoverer.stopDiscovery()
                 self.discoverer.startDiscovery { (error: Error?) in
                     if error != nil {
@@ -174,14 +174,14 @@ class NearbyMethodCallHandler: MethodCallHandler {
                     result(FlutterInvalidArgumentError("userName"))
                     return
                 }
-                
+
                 self.endpoints.append(Endpoint(id: endpointId, name: userName))
                 self.discoverer.requestConnection(
                     to: endpointId,
                     using: userName.data(using: .utf8)!
                 ) { (error: Error?) in
                     if error != nil {
-                        let index = self.endpoints.firstIndex(where: { $0.id == endpointId})
+                        let index = self.endpoints.firstIndex(where: { $0.id == endpointId })
                         if index != nil {
                             self.endpoints.remove(at: index!)
                         }
@@ -347,13 +347,12 @@ class NearbyMethodCallHandler: MethodCallHandler {
 }
 
 class FlutterInvalidArgumentError: FlutterError {
-    
     init(_ argument: String) {
         self.argument = argument
     }
 
     let argument: String
-    
+
     override var code: String {
         "INVALID_ARGUMENTS_FORMAT: \(argument)"
     }

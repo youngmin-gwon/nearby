@@ -7,10 +7,10 @@ extension NearbyMethodCallHandler: ConnectionManagerDelegate {
         from endpointId: EndpointID,
         verificationHandler: @escaping (Bool) -> Void
     ) {
-        guard let index = self.endpoints.firstIndex(where: { $0.id == endpointId }) else {
+        guard let index = endpoints.firstIndex(where: { $0.id == endpointId }) else {
             return
         }
-        let endpoint = self.endpoints.remove(at: index)
+        let endpoint = endpoints.remove(at: index)
         let request = ConnectionRequest(
             endpointId: endpoint.id,
             endpointName: endpoint.name,
