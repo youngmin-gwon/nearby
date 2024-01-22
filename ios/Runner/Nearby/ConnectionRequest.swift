@@ -1,4 +1,4 @@
-struct Endpoint  {
+struct Endpoint {
     let id: String
     let name: String
 }

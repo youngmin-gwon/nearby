@@ -11,8 +11,6 @@
 		1B074D1A36C2B254CE1307D0 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3140157A24992F757AA8E379 /* Pods_RunnerTests.framework */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		4D6F4D602B0F3F3C005F39DC /* NearbyConnections in Frameworks */ = {isa = PBXBuildFile; productRef = 4D6F4D5F2B0F3F3C005F39DC /* NearbyConnections */; };
-		4D6F4D622B0F3F41005F39DC /* NearbyCoreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 4D6F4D612B0F3F41005F39DC /* NearbyCoreAdapter */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		8452F4672B25A18D00C14979 /* ConnectionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452F4662B25A18D00C14979 /* ConnectionRequest.swift */; };
 		84ED3AB32B2205F500F0F776 /* MethodCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED3AB22B2205F500F0F776 /* MethodCallHandler.swift */; };
@@ -559,6 +557,7 @@
 				DEVELOPMENT_TEAM = 2X3SRMT9DW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -742,6 +741,7 @@
 				DEVELOPMENT_TEAM = 2X3SRMT9DW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -766,6 +766,7 @@
 				DEVELOPMENT_TEAM = 2X3SRMT9DW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
