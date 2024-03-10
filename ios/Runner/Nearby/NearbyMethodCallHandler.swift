@@ -29,14 +29,15 @@ class NearbyMethodCallHandler: MethodCallHandler {
 
     public func setHandler() {
         methodChannel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
-            guard let args = call.arguments as? [String: Any] else {
-                result(FlutterInvalidArgumentError("args"))
-                return
-            }
 
             switch call.method {
             case "startAdvertising":
                 print("startAdvertising")
+
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
 
                 guard let userName = args["userName"] as? String else {
                     result(FlutterInvalidArgumentError("userName"))
@@ -68,6 +69,10 @@ class NearbyMethodCallHandler: MethodCallHandler {
 
             case "startDiscovery":
                 print("startDiscovery")
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
 
                 guard let strategyName = args["strategy"] as? String else {
                     result(FlutterInvalidArgumentError("strategy"))
@@ -143,6 +148,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
             case "disconnectFromEndpoint":
                 print("disconnectFromEndpoint")
 
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
+
                 guard let endpointId = args["endpointId"] as? String else {
                     result(FlutterInvalidArgumentError("endpointId"))
                     return
@@ -164,6 +174,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
 
             case "requestConnection":
                 print("requestConnection")
+
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
 
                 guard let endpointId = args["endpointId"] as? String else {
                     result(FlutterInvalidArgumentError("enpointId"))
@@ -199,6 +214,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
             case "acceptConnection":
                 print("acceptConnection")
 
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
+
                 guard let endpointId = args["endpointId"] as? String else {
                     result(FlutterInvalidArgumentError("endpointId"))
                     return
@@ -216,6 +236,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
             case "rejectConnection":
                 print("rejectConnection")
 
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
+
                 guard let endpointId = args["endpointId"] as? String else {
                     result(FlutterInvalidArgumentError("endpointId"))
                     return
@@ -232,6 +257,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
 
             case "sendBytesPayload":
                 print("sendBytesPayload")
+
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
 
                 guard let endpointIds = args["endpointIds"] as? [String] else {
                     result(FlutterInvalidArgumentError("endpointIds"))
@@ -266,6 +296,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
 
             case "sendFilePayload":
                 print("sendFilePayload")
+
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
 
                 guard let endpointIds = args["endpointIds"] as? [String] else {
                     result(FlutterInvalidArgumentError("endpointIds"))
@@ -308,6 +343,11 @@ class NearbyMethodCallHandler: MethodCallHandler {
 
             case "cancelPayload":
                 print("cancelPayload")
+
+                guard let args = call.arguments as? [String: Any] else {
+                    result(FlutterInvalidArgumentError("args"))
+                    return
+                }
 
                 guard let payloadId = args["payloadId"] as? NSNumber else {
                     result(FlutterInvalidArgumentError("payloadId"))
