@@ -181,7 +181,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                 }
 
                 guard let endpointId = args["endpointId"] as? String else {
-                    result(FlutterInvalidArgumentError("enpointId"))
+                    result(FlutterInvalidArgumentError("endpointId"))
                     return
                 }
 
@@ -274,7 +274,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                 }
 
                 let payloadId = PayloadID.unique()
-                var token: CancellationToken? = nil
+                var token: CancellationToken?
                 token = self.connectionManager.send(
                     bytes.data,
                     to: endpointIds,
@@ -320,7 +320,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                 let url = URL(fileURLWithPath: filePath)
                 let payloadId = PayloadID.unique()
 
-                var token: CancellationToken? = nil
+                var token: CancellationToken?
                 token = self.connectionManager.sendResource(
                     at: url,
                     withName: name,
