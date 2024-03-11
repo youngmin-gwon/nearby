@@ -224,7 +224,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                     return
                 }
 
-                guard let index = self.requests.firstIndex(where: { $0.endpointId == endpointId }) else {
+                guard let index = self.requests.firstIndex(where: { $0.endpoint.id == endpointId }) else {
                     result(FlutterInvalidArgumentError("no such endpointId"))
                     return
                 }
@@ -246,7 +246,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                     return
                 }
 
-                guard let index = self.requests.firstIndex(where: { $0.endpointId == endpointId }) else {
+                guard let index = self.requests.firstIndex(where: { $0.endpoint.id == endpointId }) else {
                     result(FlutterInvalidArgumentError("no such endpointId"))
                     return
                 }
@@ -273,7 +273,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                     return
                 }
 
-                let payloadId = Int64(UUID().hashValue)
+                let payloadId = PayloadID.unique()
                 var token: CancellationToken? = nil
                 token = self.connectionManager.send(
                     bytes.data,
@@ -318,7 +318,7 @@ class NearbyMethodCallHandler: MethodCallHandler {
                 }
 
                 let url = URL(fileURLWithPath: filePath)
-                let payloadId = Int64(UUID().hashValue)
+                let payloadId = PayloadID.unique()
 
                 var token: CancellationToken? = nil
                 token = self.connectionManager.sendResource(

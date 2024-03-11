@@ -1,10 +1,10 @@
-struct Endpoint {
+struct Endpoint : Identifiable {
     let id: String
     let name: String
 }
 
 struct ConnectionRequest {
-    let endpointId: String
-    let endpointName: String
+    let endpoint: Endpoint
+    let verificationCode: String
     let shouldAccept: (Bool) -> Void
 }

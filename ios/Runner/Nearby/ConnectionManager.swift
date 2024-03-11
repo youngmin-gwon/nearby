@@ -12,8 +12,8 @@ extension NearbyMethodCallHandler: ConnectionManagerDelegate {
         }
         let endpoint = endpoints.remove(at: index)
         let request = ConnectionRequest(
-            endpointId: endpoint.id,
-            endpointName: endpoint.name,
+            endpoint: endpoint,
+            verificationCode: verificationCode,
             shouldAccept: { accept in
                 verificationHandler(accept)
             }
